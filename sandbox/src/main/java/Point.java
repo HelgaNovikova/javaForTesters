@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Point {
     private double x;
     private double y;
