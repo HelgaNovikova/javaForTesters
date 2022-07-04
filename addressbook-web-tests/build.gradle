@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    testNgVersion = "7.5"
+}
+
+dependencies {
+    implementation group: 'org.testng', name: 'testng', version: "$testNgVersion"
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.3.0'
+
+}
