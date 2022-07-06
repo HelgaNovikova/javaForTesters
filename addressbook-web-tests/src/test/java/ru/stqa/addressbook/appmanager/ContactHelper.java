@@ -31,4 +31,22 @@ public class ContactHelper extends BaseHelper {
     public void submitContactData() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
+
+    public void chooseContact() {
+        click(By.xpath("//*[@title=\"Select (Olga Novikova)\"]"));
+       // "//*[@title=\"Select (Olga Novikova)\"]"
+    }
+
+    public void submitUpdateContact() {
+        click(By.xpath("//div[@id='content']/form/input[22]"));
+    }
+
+    public void chooseEditOption() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void deleteContact() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
 }

@@ -15,7 +15,10 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void gotoAddNewContact() {
-     // wd.findElement(By.id("content")).click();
         click(By.linkText("add new"));
+    }
+
+    public void goHome(){
+        click(By.linkText("home"));
     }
 }
