@@ -23,4 +23,20 @@ public class GroupHelper extends BaseHelper {
     public void initGroupCreation() {
         click(By.name("new"));
     }
+
+    public void chooseGroup() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteGroup() {
+        click(By.xpath("//div[@id='content']/form/input[5]"));
+    }
+
+    public void initModification() {
+        click(By.xpath("//div[@id='content']/form/input[6]"));
+    }
+
+    public void submitModification() {
+        click(By.name("update"));
+    }
 }
