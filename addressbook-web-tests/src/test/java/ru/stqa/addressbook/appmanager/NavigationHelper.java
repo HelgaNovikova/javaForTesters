@@ -11,7 +11,10 @@ public class NavigationHelper extends BaseHelper {
     }
 
     public void gotoGroups() {
-      click(By.linkText("groups"));
+        if (isElementPresent(By.tagName("h1")) && isElementPresent(By.name("new"))){
+            return;
+        }
+        else click(By.linkText("groups"));
     }
 
     public void gotoAddNewContact() {
