@@ -50,4 +50,16 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
     }
+
+    public boolean isContactPresented(){
+        if (isElementPresent(By.xpath("//tr[@class=\"\"]/td[@class = \"center\"][1]/input"))){
+            return true;
+        }
+        else return false;
+    }
+
+    public void createContact(ContactData contact){
+        fillContactData(contact);
+        submitContactData();
+    }
 }
