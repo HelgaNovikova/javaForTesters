@@ -2,7 +2,11 @@ package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends BaseHelper {
 
@@ -24,8 +28,8 @@ public class GroupHelper extends BaseHelper {
         click(By.name("new"));
     }
 
-    public void chooseGroup() {
-        click(By.name("selected[]"));
+    public void chooseGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteGroup() {
@@ -52,5 +56,18 @@ public class GroupHelper extends BaseHelper {
             return true;
         }
         else return false;
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List <GroupData> groups = new ArrayList<GroupData>();
+        List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements){
+            groups.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
+        };
+        return groups;
     }
 }
