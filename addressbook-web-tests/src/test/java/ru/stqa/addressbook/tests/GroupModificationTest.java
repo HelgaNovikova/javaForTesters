@@ -2,6 +2,7 @@ package ru.stqa.addressbook.tests;
 
 import net.bytebuddy.build.ToStringPlugin;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.GroupData;
 
@@ -9,22 +10,23 @@ import java.util.*;
 
 public class GroupModificationTest extends TestBase{
 
-    @Test
-    public void testGroupModification(){
+    @BeforeMethod
+    public void preconditions(){
         app.getNavigationHelper().gotoGroups();
         if (!app.getGroupHelper().isGroupPresented()){
-            app.getGroupHelper().createGroup(new GroupData("novikova1", "novikovaHeader", "novikovaFooter"));
+            app.getGroupHelper().createGroup(new GroupData().withName("novikova1").withHeader("novikovaHeader").withFooter("novikovaFooter"));
             app.getNavigationHelper().gotoGroups();
         }
+    }
+
+    @Test
+    public void testGroupModification(){
         List<GroupData> groupsBefore = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().chooseGroup(groupsBefore.size() - 1);
-        app.getGroupHelper().initModification();
-        GroupData newGroup = new GroupData(groupsBefore.get(groupsBefore.size() - 1).getId(),"novikovaM", "novikovaHeaderN", "novikovaFooterD");
-        app.getGroupHelper().fillGroupData(newGroup);
-        app.getGroupHelper().submitModification();
-        groupsBefore.remove(groupsBefore.size() - 1);
+        int index = groupsBefore.size() - 1;
+        GroupData newGroup = new GroupData().withId(groupsBefore.get(index).getId()).withName("novikovaM").withHeader("novikovaHeaderN").withFooter("novikovaFooterD");
+        app.getGroupHelper().modifyGroup(index, newGroup);
+        groupsBefore.remove(index);
         groupsBefore.add(newGroup);
-        app.getNavigationHelper().gotoGroups();
         List<GroupData> groupsAfter = app.getGroupHelper().getGroupList();
         Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());;
         groupsBefore.sort(byId);

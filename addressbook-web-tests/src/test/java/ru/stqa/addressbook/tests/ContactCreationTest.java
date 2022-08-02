@@ -15,7 +15,7 @@ public class ContactCreationTest extends TestBase {
     app.getNavigationHelper().goHome();
     List <ContactData> contactsBefore = app.getContactHelper().getContacts();
     app.getNavigationHelper().gotoAddNewContact();
-    ContactData newContact = new ContactData("Olga", "Novikova", "Novikova", "tester", "nickname", "company", "address", "23445435345", "6785634", "3475687", "567789789", "dfgdffg@sf.ru", "mail2@mail.ru", "mail3@mail.ru", "homepage.com");
+    ContactData newContact = new ContactData().withFirstName("Olga").withLastName("Novikova").withEmail("dfgdffg@sf.ru").withHomePhoneNumber("567789789");
     contactsBefore.add(newContact);
     app.getContactHelper().createContact(newContact);
     app.getNavigationHelper().goHome();
@@ -24,7 +24,6 @@ public class ContactCreationTest extends TestBase {
     contactsBefore.sort(byId);
     contactsAfter.sort(byId);
     Assert.assertEquals(contactsBefore, contactsAfter);
-   // app.getSessionHelper().logout();
   }
 
 }

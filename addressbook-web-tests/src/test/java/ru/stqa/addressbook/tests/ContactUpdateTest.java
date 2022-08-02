@@ -1,6 +1,7 @@
 package ru.stqa.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
 
@@ -9,20 +10,22 @@ import java.util.List;
 
 public class ContactUpdateTest extends TestBase{
 
-    @Test
-    public void testUpdateContact(){
+    @BeforeMethod
+    public void preconditions() {
         app.getNavigationHelper().goHome();
         if (!app.getContactHelper().isContactPresented()){
             app.getNavigationHelper().gotoAddNewContact();
-            app.getContactHelper().createContact(new ContactData("Olga", "Novikova", "Novikova", "tester", "nickname", "company", "address", "23445435345", "6785634", "3475687", "567789789", "dfgdffg@sf.ru", "mail2@mail.ru", "mail3@mail.ru", "homepage.com"));
+            app.getContactHelper().createContact(new ContactData().withFirstName("Olga").withLastName("Novikova").withEmail("mail2@mail.ru").withHomePhoneNumber("567789789"));
             app.getNavigationHelper().goHome();
         };
+    }
+
+    @Test
+    public void testUpdateContact(){
         List <ContactData> contactsBefore = app.getContactHelper().getContacts();
-        app.getContactHelper().chooseContact();
-        app.getContactHelper().chooseEditOption();
-        ContactData newContact = new ContactData(contactsBefore.get(0).getId(),"Olga1", "Novikova1", "Novikova1", "tester", "nickname", "company", "address", "23445435345", "6785634", "3475687", "567789789", "dfgdffg@sf.ru", "mail2@mail.ru", "mail3@mail.ru", "homepage.com");
-        app.getContactHelper().fillContactData(newContact);
-        app.getContactHelper().submitUpdateContact();
+        ContactData newContact = new ContactData().withId(contactsBefore.get(0).getId()).withFirstName("Olga1").withLastName("Novikova1")
+                .withHomePhoneNumber("23445435345").withEmail("dfgdffg@sf.ru");
+        app.getContactHelper().modifyContact(newContact);
         app.getNavigationHelper().goHome();
         contactsBefore.remove(0);
         contactsBefore.add(newContact);

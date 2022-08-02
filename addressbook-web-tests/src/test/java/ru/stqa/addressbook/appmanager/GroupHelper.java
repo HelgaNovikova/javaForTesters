@@ -66,8 +66,24 @@ public class GroupHelper extends BaseHelper {
         List <GroupData> groups = new ArrayList<GroupData>();
         List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
-            groups.add(new GroupData(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")), element.getText(), null, null));
+            groups.add(new GroupData().withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))).
+                            withName(element.getText()).withFooter(null).withHeader(null));
         };
         return groups;
+    }
+
+    public void gotoGroups() {
+        if (isElementPresent(By.tagName("h1")) && isElementPresent(By.name("new"))){
+            return;
+        }
+        else click(By.linkText("groups"));
+    }
+
+    public void modifyGroup(int index, GroupData newGroup){
+        chooseGroup(index);
+        initModification();
+        fillGroupData(newGroup);
+        submitModification();
+        gotoGroups();
     }
 }
