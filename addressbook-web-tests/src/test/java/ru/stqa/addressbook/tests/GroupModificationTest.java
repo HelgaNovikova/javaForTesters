@@ -5,8 +5,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.GroupData;
+import ru.stqa.addressbook.model.Groups;
 
 import java.util.*;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTest extends TestBase{
 
@@ -21,16 +25,11 @@ public class GroupModificationTest extends TestBase{
 
     @Test
     public void testGroupModification(){
-        List<GroupData> groupsBefore = app.getGroupHelper().getGroupList();
-        int index = groupsBefore.size() - 1;
-        GroupData newGroup = new GroupData().withId(groupsBefore.get(index).getId()).withName("novikovaM").withHeader("novikovaHeaderN").withFooter("novikovaFooterD");
-        app.getGroupHelper().modifyGroup(index, newGroup);
-        groupsBefore.remove(index);
-        groupsBefore.add(newGroup);
-        List<GroupData> groupsAfter = app.getGroupHelper().getGroupList();
-        Comparator<? super GroupData> byId = (Comparator<GroupData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());;
-        groupsBefore.sort(byId);
-        groupsAfter.sort(byId);
-        Assert.assertEquals(groupsBefore, groupsAfter);
+        Groups groupsBefore = app.getGroupHelper().getGroupSet();
+        GroupData modifyingGroup = groupsBefore.iterator().next();
+        GroupData newGroup = new GroupData().withId(modifyingGroup.getId()).withName("novikovaM").withHeader("novikovaHeaderN").withFooter("novikovaFooterD");
+        app.getGroupHelper().modifyGroup(newGroup);
+        Groups groupsAfter = app.getGroupHelper().getGroupSet();
+        assertThat(groupsAfter, equalTo(groupsBefore.without(modifyingGroup).withAdded(newGroup)));
     }
 }

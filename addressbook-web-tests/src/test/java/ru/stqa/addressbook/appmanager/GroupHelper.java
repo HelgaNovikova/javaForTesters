@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.addressbook.model.GroupData;
-
-import java.util.ArrayList;
+import ru.stqa.addressbook.model.Groups;
 import java.util.List;
 
 public class GroupHelper extends BaseHelper {
@@ -28,8 +27,8 @@ public class GroupHelper extends BaseHelper {
         click(By.name("new"));
     }
 
-    public void chooseGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void chooseGroupById(int index) {
+        wd.findElement(By.cssSelector("input[value='" + index + "']")).click();
     }
 
     public void deleteGroup() {
@@ -58,16 +57,12 @@ public class GroupHelper extends BaseHelper {
         else return false;
     }
 
-    public int getGroupCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public List<GroupData> getGroupList() {
-        List <GroupData> groups = new ArrayList<GroupData>();
+    public Groups getGroupSet() {
+        Groups groups = new Groups();
         List <WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
             groups.add(new GroupData().withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))).
-                            withName(element.getText()).withFooter(null).withHeader(null));
+                    withName(element.getText()).withFooter(null).withHeader(null));
         };
         return groups;
     }
@@ -79,8 +74,8 @@ public class GroupHelper extends BaseHelper {
         else click(By.linkText("groups"));
     }
 
-    public void modifyGroup(int index, GroupData newGroup){
-        chooseGroup(index);
+    public void modifyGroup(GroupData newGroup){
+        chooseGroupById(newGroup.getId());
         initModification();
         fillGroupData(newGroup);
         submitModification();
