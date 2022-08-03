@@ -4,8 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
+import ru.stqa.addressbook.model.Contacts;
+import ru.stqa.addressbook.model.GroupData;
 
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeleteTest extends TestBase{
 
@@ -21,13 +26,13 @@ public class ContactDeleteTest extends TestBase{
 
     @Test
     public void testContactDelete(){
-        List <ContactData> contactsBefore = app.getContactHelper().getContacts();
-        contactsBefore.remove(0);
-        app.getContactHelper().chooseContact();
+        Contacts contactsBefore = app.getContactHelper().getContactsSet();
+        ContactData deletingContact = contactsBefore.iterator().next();
+        app.getContactHelper().chooseContactById(deletingContact.getId());
         app.getContactHelper().deleteContact();
         app.getNavigationHelper().goHome();
-        List <ContactData> contactsAfter = app.getContactHelper().getContacts();
-        Assert.assertEquals(contactsBefore, contactsAfter);
+        Contacts contactsAfter = app.getContactHelper().getContactsSet();
+        assertThat(contactsAfter, equalTo(contactsBefore.without(deletingContact)));
     }
 
 

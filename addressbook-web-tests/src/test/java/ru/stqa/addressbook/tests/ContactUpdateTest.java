@@ -4,9 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactData;
+import ru.stqa.addressbook.model.Contacts;
+import ru.stqa.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactUpdateTest extends TestBase{
 
@@ -22,17 +27,14 @@ public class ContactUpdateTest extends TestBase{
 
     @Test
     public void testUpdateContact(){
-        List <ContactData> contactsBefore = app.getContactHelper().getContacts();
-        ContactData newContact = new ContactData().withId(contactsBefore.get(0).getId()).withFirstName("Olga1").withLastName("Novikova1")
+        Contacts contactsBefore = app.getContactHelper().getContactsSet();
+        ContactData modifyingContact = contactsBefore.iterator().next();
+        ContactData newContact = new ContactData().withId(modifyingContact.getId()).withFirstName("Olga1").withLastName("Novikova1")
                 .withHomePhoneNumber("23445435345").withEmail("dfgdffg@sf.ru");
         app.getContactHelper().modifyContact(newContact);
         app.getNavigationHelper().goHome();
-        contactsBefore.remove(0);
-        contactsBefore.add(newContact);
-        List <ContactData> contactsAfter = app.getContactHelper().getContacts();
-        Comparator<? super ContactData> byId = (Comparator<ContactData>) (o1, o2) -> Integer.compare(o1.getId(), o2.getId());;
-        contactsBefore.sort(byId);
-        contactsAfter.sort(byId);
-        Assert.assertEquals(contactsBefore, contactsAfter);
+
+        Contacts contactsAfter = app.getContactHelper().getContactsSet();
+        assertThat(contactsAfter, equalTo(contactsBefore.without(modifyingContact).withAdded(newContact)));
     }
 }

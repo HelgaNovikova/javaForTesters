@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.addressbook.model.ContactData;
+import ru.stqa.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,10 @@ public class ContactHelper extends BaseHelper {
 
     public void chooseContact() {
         click(By.xpath("//tr[@class=\"\"]/td[@class = \"center\"][1]/input"));
+    }
+
+    public void chooseContactById(int index) {
+        click(By.xpath("//input[@value='" + index +"']"));
     }
 
     public void submitUpdateContact() {
@@ -65,6 +70,19 @@ public class ContactHelper extends BaseHelper {
                      ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName);
                      contacts.add(contact);
                  }
+        return contacts;
+    }
+
+    public Contacts getContactsSet(){
+        Contacts contacts = new Contacts();
+        List <WebElement> elements = wd.findElements(By.xpath("//tr[@name = \"entry\"]"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String name = element.findElement(By.xpath("td[3]")).getText();
+            String lastName = element.findElement(By.xpath("td[2]")).getText();
+            ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName);
+            contacts.add(contact);
+        }
         return contacts;
     }
 
