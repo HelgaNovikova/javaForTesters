@@ -7,6 +7,17 @@ public class ContactData {
     private String lastName;
     private String homePhoneNumber;
 
+    public ContactData withSecondPhoneNumber(String secondPhoneNumber) {
+        this.secondPhoneNumber = secondPhoneNumber;
+        return this;
+    }
+
+    public String getSecondPhoneNumber() {
+        return secondPhoneNumber;
+    }
+
+    private String secondPhoneNumber;
+
     public String getAllPhones() {
         return allPhones;
     }

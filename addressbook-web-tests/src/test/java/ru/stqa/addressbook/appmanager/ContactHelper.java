@@ -87,16 +87,18 @@ public class ContactHelper extends BaseHelper {
         initContactModificationById(contact.getId());
         String name = wd.findElement(By.xpath("//form[1]/input[3]")).getAttribute("value");
         String lastName = wd.findElement(By.xpath("//form[1]/input[5]")).getAttribute("value");
-        String homePhoneNumber = wd.findElement(By.xpath("//form[1]/input[11]")).getAttribute("value");
-        String mobilePhoneNumber = wd.findElement(By.xpath("//form[1]/input[12]")).getAttribute("value");
-        String workPhoneNumber = wd.findElement(By.xpath("//form[1]/input[13]")).getAttribute("value");
+        String homePhoneNumber = wd.findElement(By.xpath("//input[@name=\"home\"]")).getAttribute("value");
+        String mobilePhoneNumber = wd.findElement(By.xpath("//input[@name='mobile']")).getAttribute("value");
+        String workPhoneNumber = wd.findElement(By.xpath("//input[@name='work']")).getAttribute("value");
+        String secondPhoneNumber = wd.findElement(By.xpath("//input[@name='phone2']")).getAttribute("value");
         String email = wd.findElement(By.xpath("//form[1]/input[15]")).getAttribute("value");
         String email2 = wd.findElement(By.xpath("//form[1]/input[16]")).getAttribute("value");
         String email3 = wd.findElement(By.xpath("//form[1]/input[17]")).getAttribute("value");
         String postAddress = wd.findElement(By.xpath("//textarea[@name='address']")).getText();
         return new ContactData().withWorkPhoneNumber(workPhoneNumber).withMobilePhoneNumber(mobilePhoneNumber)
                 .withHomePhoneNumber(homePhoneNumber).withFirstName(name).withLastName(lastName)
-                .withEmail(email).withEmail2(email2).withEmail3(email3).withPostAddress(postAddress);
+                .withEmail(email).withEmail2(email2).withEmail3(email3).withPostAddress(postAddress)
+                .withSecondPhoneNumber(secondPhoneNumber);
     }
 
     public void initContactModificationById(int id) {
