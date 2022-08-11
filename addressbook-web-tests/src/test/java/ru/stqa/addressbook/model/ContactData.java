@@ -1,10 +1,15 @@
 package ru.stqa.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class ContactData {
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private String homePhoneNumber;
 
     public ContactData withSecondPhoneNumber(String secondPhoneNumber) {
@@ -16,14 +21,18 @@ public class ContactData {
         return secondPhoneNumber;
     }
 
+    @Expose
     private String secondPhoneNumber;
 
     public String getAllPhones() {
         return allPhones;
     }
 
+    @Expose
     private String allPhones;
+    @Expose
     private String allEmails;
+    @Expose
     private String postAddress;
 
     public ContactData withAllEmails(String allEmails) {
@@ -85,11 +94,17 @@ public class ContactData {
         return this;
     }
 
+    @Expose
     private String workPhoneNumber;
+    @Expose
     private String mobilePhoneNumber;
+    @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
+
     private int id = Integer.MAX_VALUE;
 
     @Override

@@ -1,8 +1,11 @@
 package ru.stqa.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class GroupData {
+    @Expose
     private String name;
 
     public GroupData withId(int id) {
@@ -10,6 +13,7 @@ public class GroupData {
         return this;
     }
 
+    @Expose
     private String header;
 
     public GroupData withFooter(String footer) {
@@ -27,7 +31,9 @@ public class GroupData {
         return this;
     }
 
+    @Expose
     private String footer;
+
     private int id = Integer.MAX_VALUE;;
 
     @Override
