@@ -21,9 +21,10 @@ public class ContactPhoneMailPostTests extends TestBase {
         if (!app.getContactHelper().isContactPresented()) {
             app.getNavigationHelper().gotoAddNewContact();
             app.getContactHelper().createContact(new ContactData().withFirstName("Olga").withLastName("Novikova")
-                    .withEmail("mail2@mail.ru").withHomePhoneNumber("567789789").withEmail2("mail2@mail.ru")
-                    .withEmail3("mail3@mail.com").withMobilePhoneNumber("345345 45").withWorkPhoneNumber("45-44-555")
-                    .withSecondPhoneNumber("3453345"));
+                    .withEmail("mail@mail.ru").withHomePhoneNumber("1")
+                    .withEmail2("mail2@mail.ru")
+                    .withEmail3("mail3@mail.com").withMobilePhoneNumber("2").withWorkPhoneNumber("3")
+                    .withSecondPhoneNumber("4"));
             app.getNavigationHelper().goHome();
         };
         contactFromMainPage = app.getContactHelper().getContactsSet().iterator().next();
@@ -31,14 +32,17 @@ public class ContactPhoneMailPostTests extends TestBase {
     }
 
     @Test
-    public void testPhones() {
+    public void testPhonesEmailsPOstAddress() {
+        String test = contactFromMainPage.getAllPhones();
+        String test2 = mergePhones(contactFromEditForm);
         assertThat(contactFromMainPage.getAllPhones(),equalTo(mergePhones(contactFromEditForm)));
         assertThat(contactFromMainPage.getAllEmails(),equalTo(mergeMails(contactFromEditForm)));
         assertThat(contactFromMainPage.getPostAddress(),equalTo(contactFromEditForm.getPostAddress()));
     }
 
     private String mergePhones(ContactData contact){
-        return Arrays.asList(contact.getMobilePhoneNumber(), contact.getWorkPhoneNumber(), contact.getHomePhoneNumber())
+        return Arrays.asList(contact.getHomePhoneNumber(), contact.getMobilePhoneNumber(),
+                        contact.getWorkPhoneNumber(), contact.getSecondPhoneNumber())
                 .stream().filter((s) -> !(s.equals("")))
                 .map(ContactPhoneMailPostTests::cleanPhone)
                 .collect(Collectors.joining("\n"));
@@ -47,13 +51,9 @@ public class ContactPhoneMailPostTests extends TestBase {
     private String mergeMails(ContactData contact){
         return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
                 .stream().filter((s) -> !(s.equals("")))
-                .map(ContactPhoneMailPostTests::cleanEmail)
                 .collect(Collectors.joining("\n"));
     }
 
-    private static String cleanEmail(String email){
-        return email.replaceAll("\\s", "");
-    }
 
     private static String cleanPhone(String phone){
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");

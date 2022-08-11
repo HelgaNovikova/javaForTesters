@@ -20,7 +20,12 @@ public class ContactHelper extends BaseHelper {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("home"), contactData.getHomePhoneNumber());
+        type(By.name("mobile"), contactData.getMobilePhoneNumber());
+        type(By.name("work"), contactData.getWorkPhoneNumber());
+        type(By.name("phone2"), contactData.getSecondPhoneNumber());
         type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
     }
 
     public void submitContactData() {
