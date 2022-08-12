@@ -22,7 +22,7 @@ public class ContactData {
     }
 
     @Expose
-    private String secondPhoneNumber;
+    private String secondPhoneNumber = "34345456";
 
     public String getAllPhones() {
         return allPhones;
@@ -95,15 +95,15 @@ public class ContactData {
     }
 
     @Expose
-    private String workPhoneNumber;
+    private String workPhoneNumber = "4624235";
     @Expose
-    private String mobilePhoneNumber;
+    private String mobilePhoneNumber = "344756";
     @Expose
-    private String email;
+    private String email = "dfgdfg";
     @Expose
-    private String email2;
+    private String email2 = "dfjghj";
     @Expose
-    private String email3;
+    private String email3 = "ddhrwewr";
 
     private int id = Integer.MAX_VALUE;
 

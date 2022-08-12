@@ -1,13 +1,15 @@
 package ru.stqa.addressbook.tests;
 
 import org.openqa.selenium.remote.Browser;
+import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected static final ApplicationManager app = new ApplicationManager(Browser.FIREFOX.browserName());
+    protected static final ApplicationManager app =
+            new ApplicationManager(System.getProperty("browser", Browser.CHROME.browserName()));
 
     @BeforeSuite
     public void setUp() throws Exception {

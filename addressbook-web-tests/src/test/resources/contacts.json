@@ -1,0 +1,42 @@
+[
+  {
+    "firstName": "genFirstName0",
+    "lastName": "genLastName0",
+    "homePhoneNumber": "345345",
+    "email": "genEmail0",
+    "email2": "genEmail2 0",
+    "email3": "genEmail3 0"
+  },
+  {
+    "firstName": "genFirstName1",
+    "lastName": "genLastName1",
+    "homePhoneNumber": "345345",
+    "email": "genEmail1",
+    "email2": "genEmail2 1",
+    "email3": "genEmail3 1"
+  },
+  {
+    "firstName": "genFirstName2",
+    "lastName": "genLastName2",
+    "homePhoneNumber": "345345",
+    "email": "genEmail2",
+    "email2": "genEmail2 2",
+    "email3": "genEmail3 2"
+  },
+  {
+    "firstName": "genFirstName3",
+    "lastName": "genLastName3",
+    "homePhoneNumber": "345345",
+    "email": "genEmail3",
+    "email2": "genEmail2 3",
+    "email3": "genEmail3 3"
+  },
+  {
+    "firstName": "genFirstName4",
+    "lastName": "genLastName4",
+    "homePhoneNumber": "345345",
+    "email": "genEmail4",
+    "email2": "genEmail2 4",
+    "email3": "genEmail3 4"
+  }
+]

@@ -30,7 +30,8 @@ public class ContactUpdateTest extends TestBase{
         Contacts contactsBefore = app.getContactHelper().getContactsSet();
         ContactData modifyingContact = contactsBefore.iterator().next();
         ContactData newContact = new ContactData().withId(modifyingContact.getId()).withFirstName("Olga1").withLastName("Novikova1")
-                .withHomePhoneNumber("23445435345").withEmail("dfgdffg@sf.ru");
+                .withHomePhoneNumber("23445435345").withEmail("dfgdffg@sf.ru").withEmail2("sdfs").withEmail3("dfgdfg")
+                .withMobilePhoneNumber("567567").withWorkPhoneNumber("456456").withSecondPhoneNumber("45645567");
         app.getContactHelper().modifyContact(newContact);
         app.getNavigationHelper().goHome();
 
