@@ -1,14 +1,25 @@
 package ru.stqa.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+
+    @Column(name = "firstname")
     @Expose
     private String firstName;
+
+    @Column(name = "lastname")
     @Expose
     private String lastName;
+
+    @Column(name = "home")
+    @Type(type = "text")
     @Expose
     private String homePhoneNumber;
 
@@ -22,6 +33,8 @@ public class ContactData {
     }
 
     @Expose
+    @Column(name = "phone2")
+    @Type(type = "text")
     private String secondPhoneNumber = "34345456";
 
     public String getAllPhones() {
@@ -29,9 +42,15 @@ public class ContactData {
     }
 
     @Expose
+    @Transient
     private String allPhones;
+
     @Expose
+    @Transient
     private String allEmails;
+
+    @Column(name = "address")
+    @Type(type = "text")
     @Expose
     private String postAddress;
 
@@ -95,17 +114,36 @@ public class ContactData {
     }
 
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhoneNumber = "4624235";
+
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhoneNumber = "344756";
+
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email = "dfgdfg";
+
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2 = "dfjghj";
+
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3 = "ddhrwewr";
 
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
+    @Transient
+    private String group;
 
     @Override
     public String toString() {

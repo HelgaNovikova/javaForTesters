@@ -16,20 +16,20 @@ public class GroupModificationTest extends TestBase{
 
     @BeforeMethod
     public void preconditions(){
-        app.getNavigationHelper().gotoGroups();
-        if (!app.getGroupHelper().isGroupPresented()){
-            app.getGroupHelper().createGroup(new GroupData().withName("novikova1").withHeader("novikovaHeader").withFooter("novikovaFooter"));
+        if (app.db().groups().size() == 0){
             app.getNavigationHelper().gotoGroups();
+            app.getGroupHelper().createGroup(new GroupData().withName("novikova1").withHeader("novikovaHeader").withFooter("novikovaFooter"));
         }
     }
 
     @Test
     public void testGroupModification(){
-        Groups groupsBefore = app.getGroupHelper().getGroupSet();
+        app.getNavigationHelper().gotoGroups();
+        Groups groupsBefore = app.db().groups();
         GroupData modifyingGroup = groupsBefore.iterator().next();
         GroupData newGroup = new GroupData().withId(modifyingGroup.getId()).withName("novikovaM").withHeader("novikovaHeaderN").withFooter("novikovaFooterD");
         app.getGroupHelper().modifyGroup(newGroup);
-        Groups groupsAfter = app.getGroupHelper().getGroupSet();
+        Groups groupsAfter = app.db().groups();
         assertThat(groupsAfter, equalTo(groupsBefore.without(modifyingGroup).withAdded(newGroup)));
     }
 }

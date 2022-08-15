@@ -2,6 +2,8 @@ package ru.stqa.addressbook.tests;
 
 import com.google.gson.Gson;
 import org.openqa.selenium.json.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
@@ -46,12 +48,14 @@ public class GroupCreationTests extends TestBase {
 
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData newGroup){
+
     app.getNavigationHelper().gotoGroups();
-    Groups groupsBefore = app.getGroupHelper().getGroupSet();
+    Groups groupsBefore = app.db().groups();
     app.getGroupHelper().createGroup(newGroup);
     app.getNavigationHelper().gotoGroups();
-    Groups groupsAfter = app.getGroupHelper().getGroupSet();
+    Groups groupsAfter = app.db().groups();
     newGroup.withId(groupsAfter.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     assertThat(groupsAfter, equalTo(groupsBefore.withAdded(newGroup)));
+
   }
 }

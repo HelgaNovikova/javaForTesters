@@ -1,0 +1,6 @@
+1268 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
+  C:\Users\olga_gasanova\AppData\Local\JetBrains\IdeaIC2021.3\temp-testng-customsuite.xml
+
+7189 [main] INFO  r.s.a.tests.GroupCreationTests - Start test testGroupCreation
+24765 [main] INFO  r.s.a.tests.GroupCreationTests - Stop test testGroupCreation
+24767 [main] INFO  r.s.a.tests.GroupCreationTests - Start test testGroupCreation

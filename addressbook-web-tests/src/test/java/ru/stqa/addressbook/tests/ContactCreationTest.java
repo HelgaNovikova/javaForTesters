@@ -38,11 +38,11 @@ public class ContactCreationTest extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData newContact) throws Exception {
         app.getNavigationHelper().goHome();
-        Contacts contactsBefore = app.getContactHelper().getContactsSet();
+        Contacts contactsBefore = app.db().contacts();
         app.getNavigationHelper().gotoAddNewContact();
         app.getContactHelper().createContact(newContact);
         app.getNavigationHelper().goHome();
-        Contacts contactsAfter = app.getContactHelper().getContactsSet();
+        Contacts contactsAfter = app.db().contacts();
         newContact.withId(contactsAfter.stream().mapToInt((g) -> g.getId()).max().getAsInt());
         assertThat(contactsAfter, equalTo(contactsBefore.withAdded(newContact)));
     }
