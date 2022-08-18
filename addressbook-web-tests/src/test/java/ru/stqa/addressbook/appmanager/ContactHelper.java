@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.Contacts;
+import ru.stqa.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,21 @@ public class ContactHelper extends BaseHelper {
         submitUpdateContact();
     }
 
+    public void addContactInGroup(ContactData contact, GroupData group){
+        chooseContactById(contact.getId());
+        chooseGroupToAdd(group.getId());
+        clickAddToGroup();
+    }
+
+    private void clickAddToGroup() {
+        wd.findElement(By.xpath("//input[@value='Add to']")).click();
+    }
+
+    private void chooseGroupToAdd(int id) {
+        wd.findElement(By.xpath("//select[@name='to_group']/option[@value='" + id + "']")).click();
+    }
+
+
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
         String name = wd.findElement(By.xpath("//form[1]/input[3]")).getAttribute("value");
@@ -107,6 +123,8 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void initContactModificationById(int id) {
-        wd.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
+        wd.findElement(By.xpath("//a[@href='edit.php?id='" + id + "']")).click();
     }
+
+
 }

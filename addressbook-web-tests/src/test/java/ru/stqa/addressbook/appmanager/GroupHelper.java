@@ -3,6 +3,7 @@ package ru.stqa.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 import java.util.List;
@@ -80,5 +81,13 @@ public class GroupHelper extends BaseHelper {
         fillGroupData(newGroup);
         submitModification();
         gotoGroups();
+    }
+
+    public void chooseGroupForDeletionFromContact(GroupData group) {
+        wd.findElement(By.xpath("//select[@name='group']/option[@value='" + group.getId() + "']")).click();
+    }
+
+    public void submitDeletionGroupFromContact(){
+        wd.findElement(By.xpath("//input[@name='remove']")).click();
     }
 }
