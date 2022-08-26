@@ -32,6 +32,7 @@ public class AddContactInGroup extends TestBase{
         if (contact.getGroups().size() == groups.size()){
             app.getNavigationHelper().gotoGroups();
             app.getGroupHelper().createGroup(new GroupData().withName("novikova1").withHeader("novikovaHeader").withFooter("novikovaFooter"));
+            app.getNavigationHelper().goHome();
         }
     }
 
@@ -40,6 +41,7 @@ public class AddContactInGroup extends TestBase{
         Groups groups = app.db().groups();
         ContactData contact = app.db().contacts().iterator().next();
         checkTheAmountOfContactGroups(contact, groups);
+        groups = app.db().groups();
         Set<GroupData> groupsContactBefore = contact.getGroups();
         Iterator<GroupData> iterator = groups.iterator();
         GroupData group = iterator.next();
