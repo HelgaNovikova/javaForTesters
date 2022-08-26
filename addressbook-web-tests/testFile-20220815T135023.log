@@ -1,6 +1,0 @@
-1177 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
-  C:\Users\olga_gasanova\AppData\Local\JetBrains\IdeaIC2021.3\temp-testng-customsuite.xml
-
-6318 [main] INFO  r.s.a.tests.GroupCreationTests - Start test testGroupCreation with parameters [GroupData{name='generatedName0', id='2147483647'}]
-25050 [main] INFO  r.s.a.tests.GroupCreationTests - Stop test testGroupCreation with parameters [GroupData{name='generatedName0', id='86'}]
-25053 [main] INFO  r.s.a.tests.GroupCreationTests - Start test testGroupCreation with parameters [GroupData{name='generatedName1', id='2147483647'}]
