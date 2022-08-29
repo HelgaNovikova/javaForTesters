@@ -11,7 +11,8 @@ public class NavigationHelper extends HelperBase{
     }
 
     public NavigationHelper gotoManage(){
-        click(By.xpath("//a[@href='/mantisbt-2.25.4/mantisbt-2.25.4/manage_overview_page.php\']"));
+        //click(By.xpath("//a[@href='/mantisbt-2.25.4/mantisbt-2.25.4/manage_overview_page.php\']"));
+        click(By.xpath("//a[@href='" + app.getProperty("web.baseUrl").substring(16) + "manage_overview_page.php\']"));
         return this;
     }
 
