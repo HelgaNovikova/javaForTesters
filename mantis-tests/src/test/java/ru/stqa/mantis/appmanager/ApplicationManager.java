@@ -6,9 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Browser;
 
-import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -23,6 +21,7 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private String browser;
     private SessionHelper sessionHelper;
+    private SoapHelper soapHelper;
 
     public AccountHelper getAccountHelper() {
         return accountHelper;
@@ -83,6 +82,13 @@ public class ApplicationManager {
             ftp = new FtpHelper(this);
         }
         return ftp;
+    }
+
+    public SoapHelper soap(){
+        if (soapHelper == null){
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 
     public WebDriver getDriver() {
