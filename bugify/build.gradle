@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    testNgVersion = "7.5"
+}
+
+dependencies {
+    implementation group: 'org.testng', name: 'testng', version: "$testNgVersion"
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.1'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
+}
+
+test{
+    useTestNG{
+        suites 'src/test/resources/testNG_groups.xml'
+    }
+    if (project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')){
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')){
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
