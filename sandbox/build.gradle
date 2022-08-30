@@ -10,6 +10,10 @@ ext {
     testNgVersion = "7.5"
 }
 
+test {
+    useTestNG()
+}
+
 dependencies {
     implementation group: 'org.testng', name: 'testng', version: "$testNgVersion"
 }
